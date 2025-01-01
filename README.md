@@ -1,5 +1,7 @@
 # PyArgv
 
+[中文](./README_cn.md)
+
 PyArgv is a Python command-line parser that defines command-line arguments and parameter subarguments via dict.
 
 ## Use
