@@ -26,6 +26,25 @@ rules={
 }
 ```
 
+When long and short parameters are not set, the first character of the parameter is used as the short parameter and the parameter name is used as the long parameter by default. Input is accepted by default. The above rules can also be written as:
+
+```Python
+rules={
+    "person":{
+        "sub":{
+            "age":{},
+            "die":{
+                "i":False,
+                "sub":{
+                    "time":{
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 This defines a parameter called person, which has a short parameter `-p` and a long parameter `--person`, and it will take arguments. It has a subparameter `age`, it has a short parameter `-a` and a long parameter `--age`, and it will take arguments. It also has a subparameter `die`, it has a short parameter `-d` and a long parameter `--die`, it won't take arguments.
 
 After that, you can create an ArgvParser object and pass in rules to make it parse command-line arguments:
@@ -40,19 +59,19 @@ if __name__ == "__main__":
 Command line arguments are then passed in and parsed
 
 ```Shell
-python test.py a -p ming -a 18 -d
+python test.py a -p ming -a 18 -d -t 3
 ```
 
 Or
 
 ```Shell
-python test.py a --person ming --age 18 --die
+python test.py a --person ming --age 18 --die -t 3
 ```
 
 The above two inputs give the same result, which is:
 
 ```Python
-({'nokey': ['a'], 'person': {'nokey': ['ming'], 'age': {'nokey': ['18']}, 'die': True}}, [], False)
+({'nokey': ['a'], 'person': {'nokey': ['ming'], 'age': {'nokey': ['18']}, 'die': {'nokey': [True], 'time': {'nokey': ['3']}}}}, [], False)
 ```
 
 In this tuple, the first dict indicates the parsed parameter.

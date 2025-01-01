@@ -3,19 +3,24 @@ import pyargv
 
 rules = {
     "person": {
-        "s": "p",
-        "l": "person",
-        "i": True,
+        #"s": "p",
+        #"l": "person",
+        #"i": True,
         "sub": {
             "age": {
-                "s": "a",
-                "l": "age",
-                "i": True
+                #"s": "a",
+                #"l": "age",
+                #"i": True
             },
             "die": {
-                "s": "d",
-                "l": "die",
-                "i": False
+                #"s": "d",
+                #"l": "die",
+                "i": False,
+                "sub":{
+                    "time":{
+                        #"t":True
+                    }
+                }
             }
         }
     }

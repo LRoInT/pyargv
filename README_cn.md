@@ -21,12 +21,38 @@ rules={
             "die":{
                 "s":"d",
                 "l":"die",
-                "i":False # 不接收输入
+                "i":False, # 不接收输入
+                "sub":{
+                    "time":{
+                        "t":True
+                    }
+                }
             }
         }
     }
 }
 ```
+
+当未设置长参数与短参数时, 会默认使用参数的第一个字符作为短参数, 参数名作为长参数. 默认会接收输入. 以上规则也可写为:
+
+```Python
+rules={
+    "person":{
+        "sub":{
+            "age":{},
+            "die":{
+                "i":False,
+                "sub":{
+                    "time":{
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+其中, `s`表示短参数, `l`表示长参数, `i`表示是否接收输入, `sub`表示子参数.
 
 这定义了一个名为`person`的参数, 它有短参数`-p`和长参数`--person`, 并且会接收输入. 它有一个子参数`age`, 它有有短参数`-a`和长参数`--age`, 会接收输入. 它还有一个子参数`die`, 它有短参数`-d`和长参数`--die`, 不会接收输入.
 
@@ -54,7 +80,7 @@ python test.py a --person ming --age 18 --die
 以上两种输入得到的结果相同, 为:
 
 ```Python
-({'nokey': ['a'], 'person': {'nokey': ['ming'], 'age': {'nokey': ['18']}, 'die': True}}, [], False)
+({'nokey': ['a'], 'person': {'nokey': ['ming'], 'age': {'nokey': ['18']}, 'die': {'nokey': [True], 'time': {'nokey': ['3']}}}}, [], False)
 ```
 
 在这个`tuple`中, 第一个`dict`表示解析得到的参数.
